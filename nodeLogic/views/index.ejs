@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= data.title %></title>
+    <link rel="stylesheet" href="/public/css/ejsview.css">
+  </head>
+  <body>
+	  <div id="topnav"> 
+		<a href="/index.html">Main</a>
+		<a href="/news.html">News Feeds</a>
+		<a href="/goaltracker.html">deadlines</a>
+		<a class="active" href="/books.html">book</a>
+		<a href="./daily.html">daily puzzles</a>	
+  </div>
+	<div id="exclude_topnav">
+    <div>
+      <a href="/books.html" id="back-button" >&lt;  back</a>
+    </div>
+    
+    <div id="top_text">
+	<h1><%= data.title %></h1>
+    <img src="<%= data.cover %>">
+    <h2><%= data.author %></h2>
+    <footer><%= data.publish_year %></footer>
+    <span id="progress"><%= data.progress %></span>
+
+  </div>
+  <div id="info"> 
+
+    <p id="description"><%= data.description %></p>
+    <input type="range" min="1" max="5" value="<%= data.rating %>" disabled>
+    
+    </div>
+	</div>
+	
+	<script src="/public/js/bookpage.js"></script>
+  </body>
+</html>

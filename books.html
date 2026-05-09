@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>where the yeast of thoughts and minds resides</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+	  <div id="topnav"> 
+		<a href="./index.html">Main</a>
+		<a href="./news.html">News Feeds</a>
+		<a href="./goaltracker.html">deadlines</a>
+		<a class="active" href="./books.html">book tracker</a>
+		<a href="./daily.html">daily puzzles</a>
+	
+	  </div>
+    
+	  <div id="exclude_topnav">
+
+      <div id="create_shelf_popover" popover>
+        <form id="shelf_input">
+          <input type="text" pattern="^[a-zA-Z ]{1,20}$" id="bookshelf_name" name="shelf_name">
+          <span id="error-message" class="error" style="display:none;"></span>
+          <button type="submit" name="shelf_submit">create bookshelf</button>
+        </form>
+
+        
+      </div>
+
+      <div id="book_selector" popover>
+        <div>
+          <img src="" alt="images/notfound.jpg" class="book_cover" id="book_settings_cover">
+          <h2 id="settings_book_title"></h2>
+          <h3 id="settings_author_name"></h3>
+          
+        </div>
+        <form id="booksave">
+          <input type="hidden" name="mode" value="insert">
+          <select name="book_progress" id="book_progress">
+            <option value="finished" style="color: green;">finished</option>
+            <option value="reading" style="color: orange;" >reading</option>
+            <option value="want-to-read"> want to read</option>
+          </select>
+          <select name="bookshelf_id" id="bookshelf_selector">
+            
+          </select>
+          <input type="hidden" id="array_id" name="array_id" value="">
+          <input id="starinput" type="range" name="rating" min="1" max="5" value="1" oninput="updateStars(this.value)"/>
+          <span id="stars">☆☆☆☆☆</span>
+          
+          <button type="submit" name="book_submit">submit</button>
+        </form>
+      </div>
+      
+      <div id="user_tools">
+        <div>
+          <input type="text" id="bookSearch" placeholder="enter book title or author" type="search">
+          <button onclick="dataHandling()" popovertarget="search_container" id="fetchbtn">Fetch</button>
+        </div>
+        
+        <span id="settings">
+          
+          <button id="get" onclick="bookSettingEditData(1)" >test button</button>
+        </span>
+      </div>
+      
+      <div id="playground">
+        <button id="back-button" onclick="displayBookshelves()">&lt;  back</button>
+        <div id="library">
+          
+          
+          <div class="bookshelf" data-bookshelf-create>
+            <img class="bookshelf_thumbnail" src="images/27077ce3-835b-488a-b464-6a63b2f13484.jpeg" alt="u" style="display: block;">
+          </div>
+        </div>
+
+
+
+
+
+
+
+      </div>
+
+
+      <div id="search_container" popover>
+        
+        
+    </div>
+    
+  
+
+	<script src="book.js"></script>
+  </body>
+</html>

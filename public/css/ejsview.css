@@ -1,0 +1,80 @@
+:root{
+
+    --interact-button-color: #515050;
+    --border-radius: 30px
+}
+
+body{
+    margin: 0;
+    background-color: #515050;
+}
+#topnav {
+background-color: #333;
+overflow: clip;
+position: absolute;
+left: 0;
+right: 0;
+}
+#exclude_topnav {
+display: flex;
+flex-direction: row;
+inset-block: initial;
+padding-top: 51px;
+    justify-content: flex-start;
+color: lightgrey;
+}
+#topnav a {
+overflow: hidden;
+float:left;
+color: #f2f2f2;
+text-align: center;
+padding: 16px 26px;
+text-decoration: none;
+font-size: 17px;
+margin: auto;
+
+border-right: solid;
+border-width: 1px;
+}
+
+#topnav a:hover {
+background-color: #ddd;
+color: black
+}
+#topnav a.active {
+background-color: #04AA6D;
+color: white;
+}
+#back-button{
+    white-space: nowrap;
+    padding: 10px 20px;
+    background-color: #007bff00;
+    color: lightgray;
+    border-color: lightgray;
+    border-radius: var(--border-radius);
+    border:solid;
+    text-decoration: none;
+    display: inline-block;
+}
+#progress{
+    border:solid;
+    background-color: #038153;
+    border-color: #038153;
+    border-radius: var(--border-radius);
+    padding: 1%;
+    margin: 1%
+}
+#top_text{
+    background-color: #333;
+    border-radius: var(--border-radius);
+    padding: 2%;
+    margin-top: 1%;
+}
+
+#info{
+    background-color: #333;
+    max-width: 1400px;
+    border-radius: var(--border-radius);
+    margin: 1% 5% 0% 2%;
+    padding: 1% 1% 0% 1%;
+}
