@@ -6,8 +6,8 @@ const app = express();
 const port = 8386
 const pool = mariadb.createPool({
     host: '127.0.0.1',
-    user: 'elijah',
-    password: '0923',
+    user: 'test',
+    password: 'example', // <- these would be variables pointing towards outside the project, this is just for ease of use
     database: 'BookDataStorage',
     connectionLimit: 5
 })
@@ -82,7 +82,7 @@ app.listen(port, () => console.log(`server is listening on port: ${port}`))
 SECURITY CONCERN:
 almost none of this data is ever sanitized.
 this means the database is susceptible to sql injections
-the purpose of this app is not to be used by anyone other than me so for now that's fine
+the purpose of this app is not to be used by anyone other than me at the moment, so for now that's fine
 if i ever get more ambitious that will have to be one of the first things that change
 */
 
@@ -183,15 +183,15 @@ async function insertBook(req, res) {
             [sanitized.author, sanitized.title, sanitized.cover, sanitized.description, sanitized.publish_year, sanitized.book_progress, sanitized.rating]
         ); 
           await conn.query('INSERT INTO bookshelf_books (book_id, bookshelf_id) VALUES (?, ?);',
-            [response.insertId, sanitized.bookshelf_id] //insers it into the junction table :D
+            [response.insertId, sanitized.bookshelf_id] //insers it into the junction table
         )
     }
     catch (err) {
         console.error("Database operation error:", err);
-        throw err; // Re-throw to handle higher up
+        throw err;
     } finally {
         if (conn) {
-            conn.release(); // Release connection back to the pool
+            conn.release(); 
             console.log("Connection released to pool.");
         }
     }

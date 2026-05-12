@@ -3,7 +3,7 @@ let bookStorageObjArr = []
 async function fetchData() {
 
   try {
-    bookStorageObjArr = [] // this will clear it every time a new search pops up, hopefully
+    bookStorageObjArr = [] // this will clear it every time a new search pops up
     const bookSearch = document.getElementById("bookSearch").value.toLowerCase();
     const searchSplit = bookSearch.split(" ")
     const response = await fetch(`https://openlibrary.org/search.json?q=${searchSplit.join("+")}&limit=10`)
@@ -24,11 +24,11 @@ async function fetchData() {
 
 
 
-// this function has officially gotten too big. 
+// refactor this function to make it smaller
 async function dataHandling() {
   try {
-    // outside var? i don't know if that's good
-    const funcDataArr = await fetchData() // await is only used to call the fetch functions, so making this async might be a bad idea
+    
+    const funcDataArr = await fetchData() // await is only used to call the fetch functions, so making this whole thing async might be a bad idea for performance
     const searchContainer = document.getElementById("search_container");
     let html = `` // unsure if html var is needed
 
@@ -57,11 +57,11 @@ async function dataHandling() {
         bookCoverLnk = `images/notfound.jpg`
       }
 
-      // THIS COULD BE SPLIT UP INTO 2 FUNCTIONS! MAYBE EVEN 3
+   
 
 
 
-      // description check, idk if it's better to write a function or not but this is a function and i kinda like the syntax of using return instead of modifying a var better             
+     //split this into its own function
       const descCheck = () => {
         if (!descData.description) {
           return "no description :("
@@ -70,7 +70,6 @@ async function dataHandling() {
         } else {
           return descData.description.value
         }
-        // going back to this, i despise how this looks
       }
 
       let bookDataObj = {
@@ -167,7 +166,7 @@ function updateStars(val) {
 }
 
 
-// event listener code cause why not orginize it this way
+// event listener code
 
 
 
@@ -300,7 +299,7 @@ async function createShelf(shelfFormData) {
       },
       body: JSON.stringify(shelfFormData)
     })
-    displayBookshelves(); // this doesn't activate because the data doesn't reach it when it fires. display bookshelves may need to be rewritten to fetch the data itself
+    displayBookshelves(); // this doesn't activate because the data isn't fetched when it fires. displayBookshelves may need to be rewritten to fetch the data itself. i don't quite like making everything an async function 
   } catch (err) {
     console.log(err)
   }
@@ -362,7 +361,6 @@ function displayBooks(shelf_id) {
   .then(bookMeta => {
     let html = ``
     for(let i = 0; i < bookMeta.length; i++){
-      const [descHalf1, descHalf2] = descriptionShorten(bookMeta[i].description, 360) // fix elipses, because i don't like how it exists
       const authorsplit = bookMeta[i].author.split(", ")
       
       html += `<div><div class="books_stored" data-book-id="${bookMeta[i].id}">
@@ -384,22 +382,6 @@ function displayBooks(shelf_id) {
   })
   .catch(err => console.error('Error', err))
 }
-function descriptionShorten(desc, limit){
-  let part1, part2;
-  let elipses; // this is a dumbass way of doing anything
-  if(desc.length <=  limit){
-    part1 = desc;
-    part2 = '';
-    elipses = ''
-  } else {
-    const index = desc.lastIndexOf(' ', limit);
-    part1 = index === -1 ? desc.substring(0, limit) : desc.substring(0, index) + '-'
-    part2 = desc.substring(index === -1? limit: index).trim(); 
-    elipses = ". . ."
-  }
-  return [part1, part2, elipses]
-  
-}
 
 window.onload = function () {
   fetchBookshelf()
@@ -407,11 +389,6 @@ window.onload = function () {
     displayBookshelves()
   })
 }
-/* 
-check the character length of a string, if that string is above the character limit, wrap everything from there in a span with the title=${the rest of the text} and the name of . . .
-could also do the same with multiple authors, have it split everything past the first ,
-*/
-const testcription = `
-An enlighting look at how peaceful communication can create compassionate connections with family, friends, and other acquaintances, this book uses stories, examples, and sample dialogues to provide solutions to communication problems both at home and in the workplace. Guidance is provided on identifying and articulating feelings and needs, expressing anger fully, and exploring the power of empathy in order to speak honestly without creating hostility, break patterns of thinking that lead to anger and depression, and communicate compassionately. These nonviolent communication skills are fully explained and can be applied to personal, professional, and political differences. Included in the new edition is information on how to compassionately connect with oneself.
-`
+
+
 
